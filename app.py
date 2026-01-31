@@ -253,21 +253,37 @@ class MediaProcessor:
             if not video_id:
                 return "Error: Could not extract video ID from the URL."
             
-            
-            transcript_data = YouTubeTranscriptApi.get_transcript(video_id)
-            return ' '.join([t['text'] for t in transcript_data])
+            # Use fetch method (works with the current version)
+            try:
+                ytt_api = YouTubeTranscriptApi()
+                fetched_transcript = ytt_api.fetch(video_id)
                 
+                # Convert to text safely - handle both object attributes and dict items
+                text_parts = []
+                for snippet in fetched_transcript:
+                    if hasattr(snippet, 'text'):
+                        text_parts.append(snippet.text)
+                    elif isinstance(snippet, dict) and 'text' in snippet:
+                        text_parts.append(snippet['text'])
                 
-        except TranscriptsDisabled:
-            return "Error: Transcripts are disabled for this video. The video owner has not enabled captions."
-        except NoTranscriptFound:
-            return "Error: No transcript found for this video. The video may not have captions available."
-        except VideoUnavailable:
-            return "Error: Video is unavailable or does not exist. Please check the URL."
-        except AttributeError as e:
-            return f"Error: YouTube Transcript API method not available. Please update youtube-transcript-api package. Details: {str(e)}"
+                if text_parts:
+                    return ' '.join(text_parts)
+                else:
+                    return "Error: Transcript fetched but no text content found."
+                
+            except TranscriptsDisabled:
+                return "Error: Transcripts are disabled for this video. The video owner has not enabled captions."
+            except NoTranscriptFound:
+                return "Error: No transcript found for this video. The video may not have captions available."
+            except VideoUnavailable:
+                return "Error: Video is unavailable or does not exist. Please check the URL."
+            except AttributeError as e:
+                return f"Error: YouTube Transcript API method not available. Please update youtube-transcript-api package. Details: {str(e)}"
+            except Exception as e:
+                return f"Error: Could not retrieve transcript from YouTube. Details: {str(e)}"
+                
         except Exception as e:
-            return f"Error: Could not retrieve transcript from YouTube. Details: {str(e)}"    
+            return f"Error extracting YouTube transcript: {str(e)}"
     
     
     @staticmethod
@@ -799,6 +815,7 @@ def main():
 
 if __name__ == "__main__":
     main()
+
 
 
 
