@@ -253,25 +253,22 @@ class MediaProcessor:
             if not video_id:
                 return "Error: Could not extract video ID from the URL."
             
-            # Use fetch method (works with the current version)
-            try:
-                loader = YouTubeTranscriptApi.get_transcript(video_id)
-                return ' '.join([t['text'] for t in loader])
+            
+            transcript_data = YouTubeTranscriptApi.get_transcript(video_id)
+            return ' '.join([t['text'] for t in transcript_data])
                 
                 
-            except TranscriptsDisabled:
-                return "Error: Transcripts are disabled for this video. The video owner has not enabled captions."
-            except NoTranscriptFound:
-                return "Error: No transcript found for this video. The video may not have captions available."
-            except VideoUnavailable:
-                return "Error: Video is unavailable or does not exist. Please check the URL."
-            except AttributeError as e:
-                return f"Error: YouTube Transcript API method not available. Please update youtube-transcript-api package. Details: {str(e)}"
-            except Exception as e:
-                return f"Error: Could not retrieve transcript from YouTube. Details: {str(e)}"
-                
+        except TranscriptsDisabled:
+            return "Error: Transcripts are disabled for this video. The video owner has not enabled captions."
+        except NoTranscriptFound:
+            return "Error: No transcript found for this video. The video may not have captions available."
+        except VideoUnavailable:
+            return "Error: Video is unavailable or does not exist. Please check the URL."
+        except AttributeError as e:
+            return f"Error: YouTube Transcript API method not available. Please update youtube-transcript-api package. Details: {str(e)}"
         except Exception as e:
-            return f"Error extracting YouTube transcript: {str(e)}"
+            return f"Error: Could not retrieve transcript from YouTube. Details: {str(e)}"    
+    
     
     @staticmethod
     def generate_audio(text: str) -> BytesIO:
@@ -802,5 +799,6 @@ def main():
 
 if __name__ == "__main__":
     main()
+
 
 
