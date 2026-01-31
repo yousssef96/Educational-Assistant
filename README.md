@@ -4,6 +4,8 @@ An all-in-one, multi-modal educational ecosystem powered by **GPT-4o**. This app
 
 Built with a professional-grade architecture, it leverages **Computer Vision**, **Natural Language Processing (NLP)**, and **Speech Synthesis** to provide a 360-degree learning experience.
 
+Try it live:
+https://educational-assistant-f887iq7vqknhfqyhuhzbr8.streamlit.app/
 ---
 
 ##  Core Features
