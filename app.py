@@ -762,7 +762,6 @@ def main():
     
     # Header
     st.title("Advanced AI Educational Assistant")
-    st.markdown("Powered by Google Gemini 1.5 Pro | Professional Learning Support System")
     
     # Sidebar navigation
     st.sidebar.title("Navigation")
@@ -815,3 +814,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
