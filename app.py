@@ -255,21 +255,9 @@ class MediaProcessor:
             
             # Use fetch method (works with the current version)
             try:
-                ytt_api = YouTubeTranscriptApi()
-                fetched_transcript = ytt_api.fetch(video_id)
+                loader = YouTubeTranscriptApi.get_transcript(video_id)
+                return ' '.join([t['text'] for t in loader])
                 
-                # Convert to text safely - handle both object attributes and dict items
-                text_parts = []
-                for snippet in fetched_transcript:
-                    if hasattr(snippet, 'text'):
-                        text_parts.append(snippet.text)
-                    elif isinstance(snippet, dict) and 'text' in snippet:
-                        text_parts.append(snippet['text'])
-                
-                if text_parts:
-                    return ' '.join(text_parts)
-                else:
-                    return "Error: Transcript fetched but no text content found."
                 
             except TranscriptsDisabled:
                 return "Error: Transcripts are disabled for this video. The video owner has not enabled captions."
@@ -814,4 +802,5 @@ def main():
 
 if __name__ == "__main__":
     main()
+
 
