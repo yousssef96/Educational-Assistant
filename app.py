@@ -139,10 +139,14 @@ class DocumentProcessor:
     def extract_image_text(image_file) -> str:
         """Uses GPT-4o Vision to extract and describe text from images"""
         try:
-            
-            image_bytes = image_file.read()
             image_file.seek(0)
+            image_bytes = image_file.read()
+            
+            if not image_bytes:
+                return "Error: Image file data is empty."
+                
             base64_image = base64.b64encode(image_bytes).decode('utf-8')
+            image_file.seek(0)
             
 
             prompt = "Please extract all text from this image. If there are diagrams or tables, describe them clearly. Maintain the original language (Arabic/English)."
@@ -815,6 +819,7 @@ def main():
 
 if __name__ == "__main__":
     main()
+
 
 
 
