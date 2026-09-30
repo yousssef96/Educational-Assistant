@@ -1,6 +1,6 @@
 # 🎓 Advanced AI Educational Assistant
 
-An all-in-one, multi-modal educational ecosystem powered by **GPT-4o**. This application transforms static learning materials—PDFs, images, and YouTube videos—into interactive, high-value academic assets.
+An all-in-one, multi-modal educational ecosystem powered by **Qwen3.8** through Hugging Face. This application transforms static learning materials—PDFs, images, and YouTube videos—into interactive, high-value academic assets.
 
 Built with a professional-grade architecture, it leverages **Computer Vision**, **Natural Language Processing (NLP)**, and **Speech Synthesis** to provide a 360-degree learning experience.
 
@@ -37,8 +37,8 @@ https://educational-assistant-f887iq7vqknhfqyhuhzbr8.streamlit.app/
 | Layer | Technology |
 | :--- | :--- |
 | **Frontend** | Streamlit |
-| **Core LLM** | GPT-4o (via GitHub Models API) |
-| **Vision & OCR** | GPT-4o Vision / Tesseract / PIL |
+| **Core LLM** | Qwen3.8 (via Hugging Face API) |
+| **Vision & OCR** | Qwen3.8 / Tesseract / PIL |
 | **Data Processing** | PyPDF2 / pdf2image |
 | **Speech & Audio** | gTTS (Google Text-to-Speech) / BytesIO |
 | **Language Support** | Langdetect (Detects Arabic & English) |
