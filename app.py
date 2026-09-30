@@ -29,9 +29,9 @@ from datetime import datetime
 DetectorFactory.seed = 0
 
 class Config:
-    OPENAI_TOKEN = st.secrets["OPENAI_TOKEN"]
-    ENDPOINT = "https://models.github.ai/inference"
-    MODEL_NAME = "openai/gpt-4o"
+    HF_TOKEN  = st.secrets["HF_TOKEN"]
+    ENDPOINT = "https://router.huggingface.co/v1"
+    MODEL_NAME = "Qwen/Qwen3.8-27B:novita"
     SUPPORTED_FILE_TYPES = ["pdf", "txt", "jpg", "jpeg", "png"]
     MAX_PREVIEW_LENGTH = 500
     DEFAULT_LANGUAGE = "en"
@@ -39,7 +39,7 @@ class Config:
 
 client = OpenAI(
     base_url=Config.ENDPOINT,
-    api_key=Config.OPENAI_TOKEN
+    api_key=Config.HF_TOKEN 
 )
 
 
