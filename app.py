@@ -682,7 +682,7 @@ class ImageAnalyzer:
         
         if image_file:
             image = Image.open(image_file)
-            st.image(image, caption="Uploaded Image", use_column_width=True)
+            st.image(image, caption="Uploaded Image", use_container_width=True)
             
             with st.spinner("Analyzing image content..."):
                 extracted_text = DocumentProcessor.extract_image_text(image_file)
